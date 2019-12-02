@@ -1,0 +1,29 @@
+{
+  "name": "news-explorer-api",
+  "version": "1.0.0",
+  "description": "Яндекс.Практикум, дипломный проект, backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laka-vadim/news-explorer-api.git"
+  },
+  "author": "Vadim Popov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laka-vadim/news-explorer-api/issues"
+  },
+  "homepage": "https://github.com/laka-vadim/news-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^2.0.1"
+  },
+  "dependencies": {
+    "mongoose": "^5.7.13"
+  }
+}
