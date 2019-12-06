@@ -3,7 +3,7 @@ const NotFoundError = require('../errors/notFoundError');
 const ForbiddenError = require('../errors/forbiddenError');
 
 const getArticles = (req, res, next) => {
-  Articles.find({ owner: req._id })
+  Articles.find({ owner: req.user._id })
     .then((articles) => {
       if (!articles) throw new NotFoundError('Err 404: Articles not found');
       res.send(articles);
@@ -29,7 +29,7 @@ const postArticle = (req, res, next) => {
     source,
     link,
     image,
-    owner: req._id,
+    owner: req.user._id,
   })
     .then((article) => {
       res.status(201).send(article);
@@ -41,7 +41,7 @@ const deleteArticle = (req, res, next) => {
   Articles.findById(req.params.articleId).populate('owner')
     .then((article) => {
       if (!article) throw new NotFoundError('Err 404: Articles not found');
-      if (req.body._id !== article.owner._id.toString()) throw new ForbiddenError('Err 403: You havent permission for this');
+      if (req.user._id !== article.owner._id.toString()) throw new ForbiddenError('Err 403: You havent permission for this');
       Articles.findByIdAndRemove(req.body.articleId)
         .then((delArticle) => res.send(delArticle))
         .catch(next);

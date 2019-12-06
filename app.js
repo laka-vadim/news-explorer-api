@@ -6,8 +6,10 @@ const { celebrate, Joi, errors } = require('celebrate');
 
 const signup = require('./middlewares/signup');
 const signin = require('./middlewares/signin');
-// const auth = require('./middlewares/auth');
+const auth = require('./middlewares/auth');
 const myErrors = require('./middlewares/errors');
+const users = require('./routes/users');
+const articles = require('./routes/articles');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -24,37 +26,26 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/signup', celebrate({
+app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
     name: Joi.string().required().min(2).max(30),
   }),
 }), signup);
-app.use('/signin', celebrate({
+app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), signin);
 
-// app.use(auth);
+app.use(auth);
+
+app.use('/articles', articles);
+app.use('/users', users);
 
 app.use(errors());
 
-// Err From Controllers
+// My Custom Errors
 app.use(myErrors);
-
-
-// # возвращает информацию о пользователе (email и имя)
-// GET /users/me
-
-// # возвращает все сохранённые пользователем статьи
-// GET /articles
-
-// # создаёт статью с переданными в теле
-// # keyword, title, text, date, source, link и image
-// POST /articles
-
-// # удаляет сохранённую статью  по _id
-// DELETE /articles/articleId
