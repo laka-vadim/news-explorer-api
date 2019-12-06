@@ -8,6 +8,7 @@ const signup = require('./middlewares/signup');
 const signin = require('./middlewares/signin');
 const auth = require('./middlewares/auth');
 const myErrors = require('./middlewares/errors');
+const pageNotFound = require('./middlewares/pageNotFound');
 const users = require('./routes/users');
 const articles = require('./routes/articles');
 
@@ -44,6 +45,7 @@ app.use(auth);
 
 app.use('/articles', articles);
 app.use('/users', users);
+app.use(pageNotFound);
 
 app.use(errors());
 

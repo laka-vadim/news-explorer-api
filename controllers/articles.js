@@ -42,7 +42,7 @@ const deleteArticle = (req, res, next) => {
     .then((article) => {
       if (!article) throw new NotFoundError('Err 404: Articles not found');
       if (req.user._id !== article.owner._id.toString()) throw new ForbiddenError('Err 403: You havent permission for this');
-      Articles.findByIdAndRemove(req.body.articleId)
+      Articles.findByIdAndRemove(req.params.articleId)
         .then((delArticle) => res.send(delArticle))
         .catch(next);
     })
