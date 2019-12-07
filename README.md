@@ -5,25 +5,25 @@
 Запросы к API:
 ```
 # возвращает информацию о пользователе (email и имя)
-GET api/users/me
+GET /users/me
 
 # возвращает все сохранённые пользователем статьи
-GET api/articles
+GET /articles
 
 # создаёт статью с переданными в теле
 # keyword, title, text, date, source, link и image
-POST api/articles
+POST /articles
 
 # удаляет сохранённую статью  по _id
-DELETE api/articles/articleId
+DELETE /articles/articleId
 
 # создаёт пользователя с переданными в теле
 # email, password и name
-POST api/signup
+POST /signup
 
 # проверяет переданные в теле почту и пароль
 # и возвращает JWT
-POST api/signin
+POST /signin
 ```
 
 Чтобы развернуть проект локально необходимо иметь установленные [Git](https://git-scm.com/) и [Node.js с NPM](https://nodejs.org/en/), а также [MongoDB](https://www.mongodb.com/)
