@@ -29,24 +29,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
 
-app.post('/signup', celebrate({
+app.post('/api/signup', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required(),
+    email: Joi.string().required().email(),
     password: Joi.string().required(),
     name: Joi.string().required().min(2).max(30),
   }),
 }), signup);
-app.post('/signin', celebrate({
+app.post('/api/signin', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required(),
+    email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), signin);
 
 app.use(auth);
 
-app.use('/articles', articles);
-app.use('/users', users);
+app.use('/api/articles', articles);
+app.use('/api/users', users);
 app.use(pageNotFound);
 
 app.use(errorLogger);
